@@ -3,9 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Fibonacci</title>
 </head>
 <body>
-    
+    <!-- Implementar uma **sequência de Fibonacci** em C. A função recebe `n` e retorna o valor de Fibonacci naquela posição. O HTML exibe o resultado na tela — não no console dessa vez. Desafio extra: exibir todos os números da sequência de 0 até a posição `n` na tela, um por linha. -->
+
+    <h1>Sequência de Fibonacci</h1>
+    <p>Digite uma posição, e receba o valor de fibonacci neste índice:</p>
+    <input type="number" id="n">
+    <button onclick="runFibo()">Enviar</button>
+    <P id="res"></p>
+
+    <script src="/005-fibonacci/build/main.js"></script>
+    <script>
+
+        var fibonacci = Module.cwrap(
+            "fibonacci", "number", ["number"]
+        )
+
+        function runFibo(){
+            var n = document.querySelector("#n").value;
+            var res = fibonacci(n);
+            document.querySelector("#res").innerHTML = res;
+        }
+    </script>
 </body>
 </html>

@@ -1,0 +1,1 @@
+emcc src/functions.c -o build/main.js -sNO_EXIT_RUNTIME=1 -sEXPORTED_RUNTIME_METHODS='["cwrap","ccall"]'
