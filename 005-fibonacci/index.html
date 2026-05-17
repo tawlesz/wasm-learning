@@ -12,8 +12,10 @@
     <p>Digite uma posição, e receba o valor de fibonacci neste índice:</p>
     <input type="number" id="n">
     <button onclick="runFibo()">Enviar</button>
-    <P id="res"></p>
+    <p id="res"></p>
+    <p id="seq"></p>
 
+    
     <script src="/005-fibonacci/build/main.js"></script>
     <script>
 
@@ -25,6 +27,16 @@
             var n = document.querySelector("#n").value;
             var res = fibonacci(n);
             document.querySelector("#res").innerHTML = res;
+
+            let vet = [n];
+            vet[0] = 0;
+            vet[1] = 1;
+            for(i = 2; i <= n; i++){
+                vet[i] = vet[i-1] + vet[i-2]
+            }
+            for(i = 0; i < n; i++){
+                console.log(vet[i]);
+            }
         }
     </script>
 </body>
