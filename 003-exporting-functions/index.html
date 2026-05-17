@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wrapping</title>
+    <script src="wrapping.js"></script>
+</head>
+<body>
+    <script>
+        //cria objeto da variável só que aqui, e pode ser chamado durante todo o código, como se fosse uma cópia do codigo fonte
+        var addNumber = Module.cwrap(
+                "addNumber",
+                "number",
+                ["number", "number"]
+        );
+
+        function run_wasm(){
+            var result = Module.ccall(
+                "main", //nome da função
+                "number", //tipo de dado retornado da função
+                null,//tipos de argumento
+                null//parametro
+            );
+
+            console.log(result);
+
+            var a = document.querySelector("#a").value;
+            var b = document.querySelector("#b").value;
+
+            result = Module.ccall(
+                "addNumber", "number", ["number", "number"], [a, b]
+            );
+
+            console.log(result);
+
+            result = addNumber(8,6);
+            console.log(result);
+        }
+
+    </script>
+    
+    <input type="number" id="a">
+    <input type="number" id="b">
+    <button onclick="run_wasm()" id="btn">TRIGGER</button>
+</body>
+</html>

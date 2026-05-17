@@ -5,7 +5,6 @@ dist/
 # emscripten outputs
 *.wasm
 *.js
-*.html
 
 # object files
 *.o
@@ -19,3 +18,4 @@ emsdk/
 
 # cache
 .emscripten_cache/
+.emscripten/

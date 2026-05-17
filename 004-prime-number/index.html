@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>prime number</title>
+</head>
+<body>
+    <h1><strong>prime number</strong></h1>
+    <p>Digite um número para descobrir se é primo: </p>
+    <input type="number" id="n">
+    <button onclick="validation()">TESTAR</button>
+
+    <script src="functions.js"></script>
+    <script>
+        var prime = Module.cwrap(
+            "primeNumber", "number", ["number"]
+        );
+        function validation(){
+            var n = document.querySelector("#n").value;
+            result = prime(n);
+            if(result == 0){
+                console.log("nao eh primo");
+            }else{
+                console.log("eh primo")
+            }
+            //O desafio extra: exiba não só se é primo ou não, mas todos os primos de 1 até o número digitado.
+
+            
+
+            for (i = 2; i <= n; i++){
+                contnumb = 0;
+                for(j = 1; j <= i; j++){
+                    if (i % j == 0){
+                        contnumb = contnumb + 1;
+                    }
+                }
+                if (contnumb == 2){
+                    console.log(i);
+                }
+            }
+        }
+    </script>
+</body>
+</html>

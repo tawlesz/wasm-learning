@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="main.js"></script>
+</head>
+<body>
+    <!--  O desafio é o seguinte: faça um site para pedir dois valores e fazer as quatro operações. O resultado deve ser printado no console do browser  -->
+
+    <script>
+
+        var addNumber = Module.cwrap(
+            "addNumber", "number", ["number","number"]
+        );
+        var subNumber = Module.cwrap(
+            "subNumber", "number", ["number","number"]
+        );        
+        var multNumber = Module.cwrap(
+            "multNumber", "number", ["number","number"]
+        );
+        var divNumber = Module.cwrap(
+            "divNumber", "number", ["number","number"]
+        );
+
+        function runOperations(){
+        
+            var a = document.querySelector("#a").value;
+            var b = document.querySelector("#b").value;
+            var res = Module.ccall(
+                "addNumber", "number", ["number", "number"], [a, b]
+            )
+            console.log(res);
+
+            var res = Module.ccall(
+                "subNumber", "number", ["number", "number"], [a, b]
+            )
+            console.log(res);
+
+            var res = Module.ccall(
+                "multNumber", "number", ["number", "number"], [a, b]
+            )
+            console.log(res);
+
+            var res = Module.ccall(
+                "divNumber", "number", ["number", "number"], [a, b]
+            )
+            console.log(res);
+        
+
+        var c = 5;
+        var d = 5;
+        console.log(addNumber(c, d));
+        console.log(subNumber(c, d));
+        console.log(multNumber(c, d));
+        console.log(divNumber(c, d));
+        };
+    </script>
+
+    <input type="number" id="a">
+    <input type="number" id="b">
+    <button onclick="runOperations()">TRIGGER</button>
+</body>
+</html>
