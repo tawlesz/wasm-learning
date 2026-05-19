@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ideia</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <main>
+        <div class="box-input">
+            <label for="number"><strong>Digite um número.</strong></label>
+            <input type="number" name="number" id="number">
+            <p id="res"></p>
+            <label for="submit"></label>
+            <input type="submit" value="ENVIAR" onclick="rodar()">
+        </div>
+    </main>
+
+    <script src="build/main.js"></script>
+    <script>
+        var Returntriple = Module.cwrap(
+            "Returntriple", "number", ["number"]
+        )
+        function rodar(){
+            var n = document.querySelector("#number").value;
+            var res = Returntriple(n);
+            document.querySelector("#res").innerHTML = res;
+        }
+    </script>
+</body>
+</html>

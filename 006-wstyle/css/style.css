@@ -1,0 +1,52 @@
+/*RESET*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    background: url(../img/image.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+/*INPUT*/
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.box-input label {
+    display: block;
+    font-size: 40px;
+    padding: 10px;
+    color: rgb(0, 0, 33);
+}
+
+.box-input input {
+    width: 340px;
+    height: 40px;
+    background-color: #ffffff;
+    border: 1px solid #444444;
+    border-radius: 15px;
+}
+
+.box-input input[type="number"] {
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.box-input input[type="submit"] {
+    font-size: 1rem;
+    background-color: rgb(255, 213, 220);
+}
+
+.box-input input[type="submit"]:hover {
+    background-color: rgb(255, 173, 186);
+}
