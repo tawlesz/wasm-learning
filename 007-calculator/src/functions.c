@@ -6,16 +6,16 @@ float somarDois(float a, float b){
 }
 
 EMSCRIPTEN_KEEPALIVE
-float somarDois(float a, float b){
+float subtrairDois(float a, float b){
     return a - b;
 }
 
 EMSCRIPTEN_KEEPALIVE
-float somarDois(float a, float b){
+float multiplicarDois(float a, float b){
     return a * b;
 }
 
 EMSCRIPTEN_KEEPALIVE
-float somarDois(float a, float b){
+float dividirDois(float a, float b){
     return a / b;
 }
