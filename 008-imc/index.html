@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMC</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main>
+        <section>
+            <h1>Find your IMC</h1>
+            <div class="input">
+                <input type="number" name="peso" placeholder="peso" id="m">
+                <input type="number" name="altura" placeholder="altura" id="h">
+            </div>
+            <div class="btn">
+                <input type="submit" value="Enviar" onclick="runIMC()">
+            </div>
+        </section>
+
+        <script src="build/main.js"></script>
+        <script>
+            var imc = Module.cwrap(
+                "imc","number",["number","number"]
+            );
+            function runIMC(){
+                var m = document.querySelector("#m").value;
+                var h = document.querySelector("#h").value;
+
+                var res = imc(m, h);
+                console.log(res);
+            }
+        </script>
+    </main>
+</body>
+
+</html>

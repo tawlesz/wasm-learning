@@ -18,7 +18,7 @@
                     <input type="number" id="v1" placeholder="Digite aqui" class="input">
                     <label for="v2"></label>
                     <input type="number" id="v2" placeholder="Digite aqui" class="input">
-                    <p class="res"></p>
+                    <p class="res" id="res"></p>
                 </div>
                 <div class="operations">
                     <div class="line">
@@ -58,25 +58,25 @@
             var a = document.querySelector("#v1").value;
             var b = document.querySelector("#v2").value;
             var res = somarDois(a, b);
-            console.log(res);
+            document.querySelector("#res").innerHTML = res;
         }
         function runSub(){
             var a = document.querySelector("#v1").value;
             var b = document.querySelector("#v2").value;
             var res = subtrairDois(a, b);
-            console.log(res);
+            document.querySelector("#res").innerHTML = res;
         }
         function runMulti(){
             var a = document.querySelector("#v1").value;
             var b = document.querySelector("#v2").value;
             var res = multiplicarDois(a, b);
-            console.log(res);
+            document.querySelector("#res").innerHTML = res;
         }   
         function runDiv(){
             var a = document.querySelector("#v1").value;
             var b = document.querySelector("#v2").value;
             var res = dividirDois(a, b);
-            console.log(res);
+            document.querySelector("#res").innerHTML = res;
         }
     </script>
 </body>
