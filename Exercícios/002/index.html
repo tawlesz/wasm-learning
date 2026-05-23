@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        <div class="container">
+            <div class="head">
+                <h1>Area do círculo</h1>
+            </div>
+            <div class="card">
+                <div class="box-input">
+                    <label for="a"></label>
+                    <input type="number" id="a" placeholder="Digite aqui" class="input">
+                </div>
+                <div class="btn">
+                    <label for="btn"></label>
+                    <input type="submit" id="btn" value="ENVIAR" class="btn" onclick="runWasm()">
+                </div>
+                <p id="ret"></p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function runWasm(){
+            WebAssembly.instantiateStreaming(
+                fetch("streaming.wasm"), {}
+            ).then(result => {
+                var a = document.querySelector("#a").value;
+                var res = result.instance.exports.catCircleArea(a);
+                document.querySelector("#ret")
+                    .innerHTML += `${a} --> ${res} </br>` //template string
+            })
+        }
+    </script>
+</body>
+</html>
