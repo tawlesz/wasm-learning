@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C to F</title>
+</head>
+<body>
+    <div>
+        <h1>Celsius to Farenheint</h1>
+        <label for="n"></label>
+        <input type="number" name="n" id="n">
+        <button onclick="runWasm()">TRIGGER</button>
+        <p id="ret"></p>
+    </div>
+    <script>
+        var funcoesInstanciadas;
+        WebAssembly.instantiateStreaming(
+            fetch("functions.wasm"),{}
+        ).then(results => funcoesInstanciadas = results.instance.exports);
+
+        function runWasm(){
+            var n = document.querySelector("#n").value;
+            var res = funcoesInstanciadas.cToF(n);
+            document.querySelector("#ret").innerHTML += `${n}°C == ${res.toFixed(2)}°F</br>`
+        }
+    </script>
+</body>
+</html>
