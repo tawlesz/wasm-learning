@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMC</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main>
+        <section>
+            <h1>Find your IMC</h1>
+            <div class="input">
+                <input type="number" name="peso" placeholder="peso" id="m">
+                <input type="number" name="altura" placeholder="altura" id="h">
+            </div>
+            <div class="btn">
+                <input type="submit" value="Enviar" onclick="runIMC()">
+            </div>
+            <p class="" id="ret"></p>
+            <p id="cat"></p>
+        </section>
+        <!-- Calculadora de IMC — recebe peso e altura em C, calcula o IMC e retorna o valor. O JS exibe o resultado e a classificação (abaixo do peso, normal, sobrepeso, obesidade) na tela.
+        Desafio extra: retorna a classificação direto do C usando números — 0, 1, 2, 3 — e o JS traduz pra texto. -->
+        <script>
+
+            var funInst;
+            WebAssembly.instantiateStreaming(
+                fetch("functions.wasm"), {}
+            ).then(results => funInst = results.instance.exports)
+
+            function runIMC() {
+                var m = document.querySelector("#m").value;
+                var h = document.querySelector("#h").value;
+                var res = funInst.haveImc(m, h);
+                document.querySelector("#ret").innerHTML = res.toFixed(2);
+
+                var cat = funInst.category(res.toFixed(2));
+                switch(cat){
+                    case 1:
+                        document.querySelector("#cat").innerHTML = "Abaixo do Peso";
+                        break;
+                    case 2:
+                        document.querySelector("#cat").innerHTML = "Peso Ideal";
+                        break;
+                    case 3:
+                        document.querySelector("#cat").innerHTML = "Sobrepeso";
+                        break;
+                    case 4: 
+                        document.querySelector("#cat").innerHTML = "Acima do Peso";
+                        break;
+                    default:
+                        document.querySelector("#cat").innerHTML = "Undefined Error ;----;";
+                        break;
+                }
+            }
+
+        </script>
+    </main>
+</body>
+
+</html>
