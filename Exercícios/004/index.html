@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quad</title>
+</head>
+<body>
+    <section>
+        <h1>Qual sua idade?</h1>
+        <div>
+            <label for="a"></label>
+            <input type="number" name="a" id="a">
+            <button onclick="runWasm()">TRIGGER</button>
+            <p id="ret"></p>
+        </div>
+    </section>
+
+    <script>
+
+        function runWasm(){
+
+            WebAssembly.instantiateStreaming(
+                fetch("functions.wasm"),{}
+            ).then(results => {
+                var a = document.querySelector("#a").value;
+                var res = results.instance.exports.quadNum(a);
+                document.querySelector("#ret")
+                    .innerHTML += `o quadrúplo de ${a} é ${res}</br>`
+            })
+
+        }
+    </script>
+</body>
+</html>

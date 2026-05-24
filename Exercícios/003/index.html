@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>idade</title>
+</head>
+<body>
+    <section>
+        <h1>Qual sua idade?</h1>
+        <div>
+            <label for="idade"></label>
+            <input type="number" name="idade" id="idade">
+            <button onclick="runWasm()">TRIGGER</button>
+            <p id="ret"></p>
+        </div>
+    </section>
+
+    <script>
+
+        function runWasm(){
+
+            WebAssembly.instantiateStreaming(
+                fetch("functions.wasm"),{}
+            ).then(results => {
+                var i = document.querySelector("#idade").value;
+                var res = results.instance.exports.menorOuMaior(i);
+                if(res == 1) {
+                    document.querySelector("#ret")
+                        .innerHTML += `a idade ${i} é menor de idade</br>`
+                }
+                if(res == 0) {
+                    document.querySelector("#ret")
+                        .innerHTML += `a idade ${i} é maior de idade</br>`
+                }
+            })
+
+        }
+    </script>
+</body>
+</html>

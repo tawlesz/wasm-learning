@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>idade</title>
+</head>
+<body>
+    <section>
+        <h1>Operação maluca</h1>
+        <div>
+            <label for="n"></label>
+            <input type="number" name="n" id="n">
+            <button onclick="runWasm()">TRIGGER</button>
+            <p id="ret"></p>
+        </div>
+    </section>
+
+    <script>
+        //variável global exports para armazenar as funções instanciadas
+        var exports;
+        WebAssembly.instantiateStreaming(
+            fetch("functions.wasm"),{}
+        ).then(results => exports = results.instance.exports);
+
+        function runWasm(){
+            var n = document.querySelector("#n").value
+            var res = exports.calculate(n);
+            document.querySelector("#ret").innerHTML += `${n} => ${res}</br>`
+        }
+    </script>
+</body>
+</html>
