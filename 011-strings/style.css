@@ -1,0 +1,29 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container, .box {
+    height: 100vh;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+form {
+    height: 10rem;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+}
+
+input {
+    height: 3rem;
+}
+

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palíndromo ou não</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="box">
+            <form action="">
+                <div><input type="text" id="num"></div>
+                <input type="button" onclick="runWasm()">
+                <p id="ret"></p>
+            </form>
+        </div>
+    </div>
+    <script>
+        var FunIns;
+        WebAssembly.instantiateStreaming(
+            fetch("functions.wasm"), {}
+        ).then(results => FunIns = results.instance.exports)
+
+        function runWasm() {
+            var a = document.querySelector("#num").value;
+            
+            // 1. Converter a string js para bytes, pois strings js não podem ser passadas diretamente para o c.
+            var strtoby = new TextEncoder().encode(a + '\0');
+            
+            // 2. Definir o espaço para a string na memória do wasm. (malloc deve ser exportada no c).
+            var ptr = FunIns.malloc(strtoby.length);
+
+            // 3. Escreve os bytes na memória do wasm. (memory deve ser exportada do c)
+            var memory = new Uint8Array(FunIns.memory.buffer);
+            memory.set(strtoby, ptr);
+
+            // 4. passar o ponteiro para o c.
+            var res = FunIns.VerPalindromo(ptr);
+
+            // 5. liberar a memória.
+            FunIns.free(ptr);
+
+
+            if (res == 0) {
+                document.querySelector("#ret").innerHTML += `${a} não é um palíndromo </br>`;
+            } else if (res == 1) { 
+                document.querySelector("#ret").innerHTML += `${a} é um palíndromo </br>`;
+            }
+        }
+    </script>
+</body>
+
+</html>
